@@ -5,10 +5,10 @@ if len(argv) !=3:
     print("Usage: python dna.py data.csv sequence.txt")
     exit()
 
-db = open(argv[1], "r")#dont touch, this breaks the code
-db2= open(argv[1], "r")#dont touch, this breaks the code
-db_read = csv.reader(db)#dont touch, this breaks the code
-db_read2 = csv.reader(db2)#dont touch, this breaks the code
+db = open(argv[1], "r")
+db2= open(argv[1], "r")
+db_read = csv.reader(db)
+db_read2 = csv.reader(db2)
 
 a= list(db_read)
     
