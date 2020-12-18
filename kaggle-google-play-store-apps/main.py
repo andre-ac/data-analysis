@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 stats_dir = './data/googleplaystore.csv'
-reviews_dir = './data/googleplaystore_user_reviews.csv' 
+reviews_dir = './data/googleplaystore_user_reviews.csv'
 
 stats_data = pd.read_csv(stats_dir)
 reviews_data = pd.read_csv(reviews_dir)
@@ -15,15 +15,14 @@ Cat = list(stats_data["Category"].unique())
 #sum amount of apps per
 dict_cat = {}
 for i in Cat:
-        num = stats_data["Category"] == i
-        dict_cat[i] = num.sum()
+    num = stats_data["Category"] == i
+    dict_cat[i] = num.sum()
 dict_cat = sorted(dict_cat.items(), key=lambda x: x[1],reverse=True)
 
 print(f"Most popular category is {dict_cat[0][0]} with {dict_cat[0][1]} apps")
 
 dict_sizes = {}
 
-#use regex to remove last digit
 #remove all that aren't floats
 
 #not ideal as this would be slow on large datasets
@@ -37,4 +36,3 @@ dict_sizes = {}
 #                 print(i)
 
 #         dict_sizes[i[1]] = size_clean
-
