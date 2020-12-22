@@ -21,25 +21,21 @@ for i in Cat:
     dict_cat[i] = num.sum()
 dict_cat = sorted(dict_cat.items(), key=lambda x: x[1],reverse=True)
 
-print(f"Most popular category is {dict_cat[0][0]} with {dict_cat[0][1]} apps")
+print(f"The most popular category is {dict_cat[0][0]} with {dict_cat[0][1]} apps")
 
 ###App with the largest size###
-dict_sizes = {}
+clean_size = stats_data
 
-#not ideal as this would be slow on large datasets
-# for i in stats_data.itertuples():
-#         if i[5][-1] == "M":
-#                 size_clean = i[5][:-1] * 1000000
-#         elif i[5][-1] == "k":
-#                 size_clean = i[5][:-1] * 1000
-#         else:
-#                 print("Error 001")
-#                 print(i)
-#         dict_sizes[i[1]] = size_clean
+# sample ['19M' '14M' '8.7M' 61k' '24M' 'Varies with device']
+
+clean_size["Size"] = clean_size["Size"].str.replace("M","")[clean_size["Size"].str.contains("M")].astype(float)
+sorted_size = clean_size.groupby("App")["Size"].sum().reset_index().sort_values(by="Size", ascending=False)
+print("The top 5 biggest Apps are " + str(list(sorted_size["App"].head(5))))
 
 ###Apps with largest num of install###
 unique_installs = stats_data["Installs"].unique()
 clean_installs = stats_data
+
 #print(stats_data.groupby(["Installs"]).count()["App"])
 # ['10,000+' '500,000+' '5,000,000+' '50,000,000+' '100,000+' '50,000+'
 #  '1,000,000+' '10,000,000+' '5,000+' '100,000,000+' '1,000,000,000+'
